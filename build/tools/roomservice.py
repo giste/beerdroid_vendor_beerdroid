@@ -42,9 +42,9 @@ DEBUG = False
 
 custom_local_manifest = ".repo/local_manifests/roomservice.xml"
 custom_default_revision =  "14.0"
-custom_dependencies = "crdroid.dependencies"
-org_manifest = "crdroidandroid"  # leave empty if org is provided in manifest
-org_display = "crDroid Android"  # needed for displaying
+custom_dependencies = "beerdroid.dependencies"
+org_manifest = "giste"  # leave empty if org is provided in manifest
+org_display = "Beerdroid"  # needed for displaying
 
 github_auth = None
 
@@ -278,15 +278,15 @@ def main():
     for repository in repositories:
         repo_name = repository['name']
 
-        if not (repo_name.startswith("android_device_") and
+        if not (repo_name.startswith("beerdroid_device_") and
                 repo_name.endswith("_" + device)):
             continue
         print("Found repository: %s" % repository['name'])
 
         fallback_branch = detect_revision(repository)
-        manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
+        manufacturer = repo_name.replace("beerdroid_device_", "").replace("_" + device, "")
         repo_path = "device/%s/%s" % (manufacturer, device)
-        adding = [{'repository': "crdroidandroid/" + repo_name, 'target_path': repo_path}]
+        adding = [{'repository': "giste/" + repo_name, 'target_path': repo_path}]
 
         add_to_manifest(adding, fallback_branch)
 
