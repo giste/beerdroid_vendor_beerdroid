@@ -221,7 +221,7 @@ def detect_revision(repo):
     githubreq = urllib.request.Request(
         repo['branches_url'].replace('{/branch}', ''))
     add_auth(githubreq)
-    result = json.loads(urllib.request.urlopen(githubreq).read().decode())
+    result = json.loads(urllib.request.urlopen(githubreq, timeout=5).read().decode())
 
     print("Calculated revision: %s" % custom_default_revision)
 
@@ -265,7 +265,7 @@ def main():
     repositories = []
 
     try:
-        result = json.loads(urllib.request.urlopen(githubreq).read().decode())
+        result = json.loads(urllib.request.urlopen(githubreq, timeout=10).read().decode())
     except urllib.error.URLError:
         print("Failed to search GitHub")
         sys.exit(1)
